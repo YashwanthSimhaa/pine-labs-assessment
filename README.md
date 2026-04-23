@@ -30,7 +30,7 @@ app/
 
 - **FastAPI** – API framework
 - **SQLAlchemy (Async)** – ORM layer
-- **SQLite** – database (chosen for simplicity)
+- **SQLite** – Light Weight SQL Database
 - **httpx** – async HTTP client (testing & ingestion)
 - **pytest** – testing framework
 
@@ -55,7 +55,7 @@ Transaction status is derived using a controlled state transition logic.
 
 Example flow:
 
-payment_initiated → payment_processed → settled
+**payment_initiated → payment_processed → settled**
 
 ---
 
@@ -120,6 +120,8 @@ Discrepancies are detected using SQL queries:
 - Comprehensive test coverage
 - Basic indexing is added on frequently queried fields (merchant_id, status, created_at) to improve query performance.
 
+---
+
 ## Setup Instructions (On Local)
 
 ### 1. Clone Repository
@@ -178,6 +180,7 @@ GET /api/v1/reconciliation/summary
 ### 5. Reconciliation Discrepancies
 GET /api/v1/reconciliation/discrepancies
 
+---
 
 ## Testing
 
@@ -222,9 +225,9 @@ postman/
 
 ## Deployment
 
-The application is deployed on Railway:
+The application is also deployed on Railway:
 
-https://your-app.up.railway.app
+https://web-production-a8565.up.railway.app/docs
 
 Note:
 SQLite is used for simplicity. Railway filesystem is ephemeral, so data may reset between deployments.
