@@ -219,7 +219,8 @@ postman/
 2. Click **Import**
 3. Import both files into Postman
 4. Select the environment (`PineLabs Env`)
-5. Run APIs directly
+5. Change the BASE_URL value if needed
+5. Run the APIs
 
 ---
 
@@ -230,5 +231,6 @@ The application is also deployed on Railway:
 https://web-production-a8565.up.railway.app/docs
 
 Note:
-SQLite is used for simplicity. Railway filesystem is ephemeral, so data may reset between deployments.
+- SQLite is used for simplicity. Railway filesystem is ephemeral, so data may reset between deployments.
+- The sample data with 10k records is already loaded into the Database by executing the script.
 

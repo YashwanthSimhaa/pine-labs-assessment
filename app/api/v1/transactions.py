@@ -11,14 +11,28 @@ router = APIRouter(prefix=settings.API_PREFIX, tags=["Transactions"])
 
 @router.get("/transactions")
 async def list_transactions(
-    merchant_id: Optional[str] = None,
-    status: Optional[str] = None,
-    start_date: Optional[datetime] = None,
-    end_date: Optional[datetime] = None,
-    limit: int = Query(10, le=100),
-    offset: int = 0,
-    sort_by: str = "created_at",
-    sort_order: str = "desc",
+    merchant_id: Optional[str] = Query(None, description="Filter by merchant ID"),
+    status: Optional[str] = Query(None, description="Filter by transaction status (e.g., payment_initiated, payment_processed, payment_failed, settled)"),
+    start_date: Optional[datetime] = Query(
+        None,
+        description="Start date in ISO format (YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS)",
+        example="2026-01-01"
+    ),
+    end_date: Optional[datetime] = Query(
+        None,
+        description="End date in ISO format (YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS)",
+        example="2026-01-31"
+    ),
+    limit: int = Query(10, le=100, description="Number of records to return (max 100)"),
+    offset: int = Query(0, description="Number of records to skip for pagination"),
+    sort_by: str = Query(
+        "created_at",
+        description="Field to sort by (created_at, amount, status)"
+    ),
+    sort_order: str = Query(
+        "desc",
+        description="Sort order: asc or desc"
+    ),
     db=Depends(get_db)
 ):
     """
